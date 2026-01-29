@@ -18,6 +18,7 @@
 		AA00000100000000000000S8 /* SavedTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BC /* SavedTag.swift */; };
 		AA00000100000000000000S9 /* SavedTagStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BD /* SavedTagStore.swift */; };
 		AA00000100000000000000SA /* SavedTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BE /* SavedTagsView.swift */; };
+		AA00000100000000000000SB /* SectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BF /* SectionTitle.swift */; };
 		AA00000100000000000000R1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BA /* Assets.xcassets */; };
 		C7BB5DD32F2B06F900BE4CA2 /* ohmynfc.icon in Resources */ = {isa = PBXBuildFile; fileRef = C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,7 @@
 		AA00000100000000000000BC /* SavedTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTag.swift; sourceTree = "<group>"; };
 		AA00000100000000000000BD /* SavedTagStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTagStore.swift; sourceTree = "<group>"; };
 		AA00000100000000000000BE /* SavedTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTagsView.swift; sourceTree = "<group>"; };
+		AA00000100000000000000BF /* SectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitle.swift; sourceTree = "<group>"; };
 		AA00000100000000000000F1 /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
 		C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = ohmynfc.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 				AA00000100000000000000B6 /* WriteView.swift */,
 				AA00000100000000000000B7 /* HistoryView.swift */,
 				AA00000100000000000000BE /* SavedTagsView.swift */,
+				AA00000100000000000000BF /* SectionTitle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				AA00000100000000000000S8 /* SavedTag.swift in Sources */,
 				AA00000100000000000000S9 /* SavedTagStore.swift in Sources */,
 				AA00000100000000000000SA /* SavedTagsView.swift in Sources */,
+				AA00000100000000000000SB /* SectionTitle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

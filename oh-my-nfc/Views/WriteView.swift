@@ -29,6 +29,7 @@ struct WriteView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
+                    SectionTitle("NFC 쓰기")
                     typeSelector
                     inputSection
                     writeButton
@@ -36,8 +37,7 @@ struct WriteView: View {
                 }
                 .padding()
             }
-            .navigationTitle("NFC 쓰기")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
             .background(Color(.systemGroupedBackground))
             .onTapGesture {
                 isFocused = false

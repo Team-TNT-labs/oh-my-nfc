@@ -9,6 +9,7 @@ struct ReadView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
+                    SectionTitle("NFC 읽기")
                     scanButton
                     statusSection
                     if !nfcManager.scannedRecords.isEmpty {
@@ -17,8 +18,7 @@ struct ReadView: View {
                 }
                 .padding()
             }
-            .navigationTitle("NFC 읽기")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
             .background(Color(.systemGroupedBackground))
         }
     }

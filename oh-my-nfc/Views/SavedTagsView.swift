@@ -8,25 +8,32 @@ struct SavedTagsView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if store.tags.isEmpty {
-                    emptyState
-                } else {
-                    tagList
-                }
-            }
-            .navigationTitle("저장된 태그")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(Color(.systemGroupedBackground))
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showingAdd = true
-                    } label: {
-                        Image(systemName: "plus")
+            ScrollView {
+                VStack(spacing: 16) {
+                    HStack {
+                        SectionTitle("저장된 태그")
+                        Spacer()
+                        Button {
+                            showingAdd = true
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.title2)
+                                .foregroundStyle(.blue)
+                        }
+                    }
+                    .padding(.horizontal)
+
+                    if store.tags.isEmpty {
+                        emptyState
+                            .padding(.top, 80)
+                    } else {
+                        tagListContent
                     }
                 }
+                .padding(.vertical)
             }
+            .toolbar(.hidden, for: .navigationBar)
+            .background(Color(.systemGroupedBackground))
             .sheet(isPresented: $showingAdd) {
                 SavedTagEditView(mode: .add)
             }
@@ -37,35 +44,39 @@ struct SavedTagsView: View {
     }
 
     private var emptyState: some View {
-        ContentUnavailableView {
-            Label("저장된 태그 없음", systemImage: "tag")
-        } description: {
+        VStack(spacing: 12) {
+            Image(systemName: "tag")
+                .font(.system(size: 40))
+                .foregroundStyle(.secondary)
+            Text("저장된 태그 없음")
+                .font(.headline)
             Text("자주 사용하는 태그 데이터를 저장해두고\n바로 NFC에 쓸 수 있습니다.")
-        } actions: {
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
             Button("새 태그 만들기") {
                 showingAdd = true
             }
             .buttonStyle(.borderedProminent)
+            .padding(.top, 4)
         }
     }
 
-    private var tagList: some View {
-        ScrollView {
-            LazyVStack(spacing: 10) {
-                ForEach(store.tags) { tag in
-                    SavedTagRow(tag: tag) {
-                        nfcManager.write(text: tag.content)
-                    } onEdit: {
-                        editingTag = tag
-                    } onDelete: {
-                        withAnimation {
-                            store.delete(tag)
-                        }
+    private var tagListContent: some View {
+        LazyVStack(spacing: 10) {
+            ForEach(store.tags) { tag in
+                SavedTagRow(tag: tag) {
+                    nfcManager.write(text: tag.content)
+                } onEdit: {
+                    editingTag = tag
+                } onDelete: {
+                    withAnimation {
+                        store.delete(tag)
                     }
                 }
             }
-            .padding()
         }
+        .padding(.horizontal)
     }
 }
 

@@ -5,57 +5,64 @@ struct HistoryView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if nfcManager.scanHistory.isEmpty {
-                    emptyState
-                } else {
-                    historyList
-                }
-            }
-            .navigationTitle("스캔 기록")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(Color(.systemGroupedBackground))
-            .toolbar {
-                if !nfcManager.scanHistory.isEmpty {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("전체 삭제", role: .destructive) {
-                            withAnimation {
-                                nfcManager.clearHistory()
+            ScrollView {
+                VStack(spacing: 16) {
+                    HStack {
+                        SectionTitle("스캔 기록")
+                        Spacer()
+                        if !nfcManager.scanHistory.isEmpty {
+                            Button("전체 삭제", role: .destructive) {
+                                withAnimation {
+                                    nfcManager.clearHistory()
+                                }
                             }
+                            .font(.subheadline)
+                            .foregroundStyle(.red)
                         }
-                        .foregroundStyle(.red)
+                    }
+                    .padding(.horizontal)
+
+                    if nfcManager.scanHistory.isEmpty {
+                        emptyState
+                            .padding(.top, 80)
+                    } else {
+                        historyContent
                     }
                 }
+                .padding(.vertical)
             }
+            .toolbar(.hidden, for: .navigationBar)
+            .background(Color(.systemGroupedBackground))
         }
     }
 
     // MARK: - Empty State
 
     private var emptyState: some View {
-        ContentUnavailableView {
-            Label("스캔 기록 없음", systemImage: "clock.arrow.circlepath")
-        } description: {
+        VStack(spacing: 12) {
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.system(size: 40))
+                .foregroundStyle(.secondary)
+            Text("스캔 기록 없음")
+                .font(.headline)
             Text("NFC 태그를 스캔하면 여기에 기록이 남습니다.")
-        } actions: {
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
             Button("태그 스캔하기") {
                 nfcManager.startScan()
             }
             .buttonStyle(.borderedProminent)
+            .padding(.top, 4)
         }
     }
 
-    // MARK: - History List
-
-    private var historyList: some View {
-        ScrollView {
-            LazyVStack(spacing: 10) {
-                ForEach(nfcManager.scanHistory) { record in
-                    HistoryRow(record: record)
-                }
+    private var historyContent: some View {
+        LazyVStack(spacing: 10) {
+            ForEach(nfcManager.scanHistory) { record in
+                HistoryRow(record: record)
             }
-            .padding()
         }
+        .padding(.horizontal)
     }
 }
 
