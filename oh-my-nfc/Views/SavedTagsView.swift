@@ -8,29 +8,32 @@ struct SavedTagsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    HStack {
-                        SectionTitle("저장된 태그")
-                        Spacer()
-                        Button {
-                            showingAdd = true
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title)
-                                .foregroundStyle(.blue)
-                        }
-                    }
-                    .padding(.horizontal)
-
-                    if store.tags.isEmpty {
-                        emptyState
-                            .padding(.top, 80)
-                    } else {
-                        tagListContent
+            VStack(spacing: 0) {
+                HStack {
+                    SectionTitle("저장된 태그")
+                    Spacer()
+                    Button {
+                        showingAdd = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title)
+                            .foregroundStyle(.blue)
                     }
                 }
-                .padding(.vertical)
+                .padding(.horizontal)
+                .padding(.top)
+
+                if store.tags.isEmpty {
+                    Spacer()
+                    emptyState
+                    Spacer()
+                } else {
+                    ScrollView {
+                        tagListContent
+                            .padding(.top, 16)
+                            .padding(.bottom)
+                    }
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
             .background(Color(.systemGroupedBackground))

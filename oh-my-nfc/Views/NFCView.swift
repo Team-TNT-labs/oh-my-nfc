@@ -8,6 +8,7 @@ struct NFCView: View {
     @State private var selectedType: WriteType = .text
     @State private var savedRecordID: UUID?
     @FocusState private var isFocused: Bool
+    @Namespace private var typeSelector
 
     enum WriteType: String, CaseIterable {
         case text = "텍스트"
@@ -142,37 +143,39 @@ struct NFCView: View {
 
             VStack(spacing: 16) {
                 // Type selector
-                HStack(spacing: 0) {
+                HStack(spacing: 4) {
                     ForEach(WriteType.allCases, id: \.self) { type in
                         Button {
-                            withAnimation(.snappy(duration: 0.25)) {
+                            withAnimation(.snappy(duration: 0.3)) {
                                 selectedType = type
                                 writeText = ""
                             }
                         } label: {
                             HStack(spacing: 6) {
                                 Image(systemName: type.icon)
-                                    .font(.subheadline.weight(.semibold))
                                 Text(type.rawValue)
-                                    .font(.body.weight(.medium))
                             }
+                            .font(.subheadline.weight(.medium))
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 12)
-                            .background(
-                                selectedType == type
-                                    ? AnyShapeStyle(.blue.gradient)
-                                    : AnyShapeStyle(.clear)
-                            )
-                            .foregroundStyle(selectedType == type ? .white : .secondary)
-                            .clipShape(.rect(cornerRadius: 8))
+                            .padding(.vertical, 11)
+                            .background {
+                                if selectedType == type {
+                                    Capsule()
+                                        .fill(Color(.systemBackground))
+                                        .shadow(color: .black.opacity(0.1), radius: 4, y: 2)
+                                        .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
+                                        .matchedGeometryEffect(id: "typeSelector", in: typeSelector)
+                                }
+                            }
+                            .foregroundStyle(selectedType == type ? .primary : .tertiary)
                         }
                         .buttonStyle(.plain)
                     }
                 }
-                .padding(3)
+                .padding(4)
                 .background(
                     Color(.tertiarySystemGroupedBackground),
-                    in: .rect(cornerRadius: 11)
+                    in: .capsule
                 )
 
                 // Input

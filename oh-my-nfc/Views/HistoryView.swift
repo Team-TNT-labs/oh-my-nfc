@@ -5,31 +5,34 @@ struct HistoryView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    HStack {
-                        SectionTitle("스캔 기록")
-                        Spacer()
-                        if !nfcManager.scanHistory.isEmpty {
-                            Button("전체 삭제", role: .destructive) {
-                                withAnimation {
-                                    nfcManager.clearHistory()
-                                }
+            VStack(spacing: 0) {
+                HStack {
+                    SectionTitle("스캔 기록")
+                    Spacer()
+                    if !nfcManager.scanHistory.isEmpty {
+                        Button("전체 삭제", role: .destructive) {
+                            withAnimation {
+                                nfcManager.clearHistory()
                             }
-                            .font(.body)
-                            .foregroundStyle(.red)
                         }
-                    }
-                    .padding(.horizontal)
-
-                    if nfcManager.scanHistory.isEmpty {
-                        emptyState
-                            .padding(.top, 80)
-                    } else {
-                        historyContent
+                        .font(.body)
+                        .foregroundStyle(.red)
                     }
                 }
-                .padding(.vertical)
+                .padding(.horizontal)
+                .padding(.top)
+
+                if nfcManager.scanHistory.isEmpty {
+                    Spacer()
+                    emptyState
+                    Spacer()
+                } else {
+                    ScrollView {
+                        historyContent
+                            .padding(.top, 16)
+                            .padding(.bottom)
+                    }
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
             .background(Color(.systemGroupedBackground))
