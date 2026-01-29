@@ -1,0 +1,114 @@
+import SwiftUI
+
+struct HistoryView: View {
+    @Environment(NFCManager.self) private var nfcManager
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if nfcManager.scanHistory.isEmpty {
+                    emptyState
+                } else {
+                    historyList
+                }
+            }
+            .navigationTitle("스캔 기록")
+            .background(Color(.systemGroupedBackground))
+            .toolbar {
+                if !nfcManager.scanHistory.isEmpty {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("전체 삭제", role: .destructive) {
+                            withAnimation {
+                                nfcManager.clearHistory()
+                            }
+                        }
+                        .foregroundStyle(.red)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Empty State
+
+    private var emptyState: some View {
+        ContentUnavailableView {
+            Label("스캔 기록 없음", systemImage: "clock.arrow.circlepath")
+        } description: {
+            Text("NFC 태그를 스캔하면 여기에 기록이 남습니다.")
+        } actions: {
+            Button("태그 스캔하기") {
+                nfcManager.startScan()
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+
+    // MARK: - History List
+
+    private var historyList: some View {
+        ScrollView {
+            LazyVStack(spacing: 10) {
+                ForEach(nfcManager.scanHistory) { record in
+                    HistoryRow(record: record)
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+// MARK: - History Row
+
+struct HistoryRow: View {
+    let record: NFCRecord
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Image(systemName: record.type.icon)
+                .font(.body.weight(.medium))
+                .foregroundStyle(.blue)
+                .frame(width: 36, height: 36)
+                .background(.blue.opacity(0.1), in: .circle)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(record.content)
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.primary)
+                    .lineLimit(2)
+
+                HStack(spacing: 6) {
+                    Text(record.type.label)
+                        .font(.caption2.weight(.semibold))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(.blue.opacity(0.1), in: .capsule)
+                        .foregroundStyle(.blue)
+
+                    Text(record.date.formatted(.relative(presentation: .named)))
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
+            }
+
+            Spacer()
+
+            Button {
+                UIPasteboard.general.string = record.content
+            } label: {
+                Image(systemName: "doc.on.doc")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding()
+        .background(.background, in: .rect(cornerRadius: 14))
+        .shadow(color: .black.opacity(0.03), radius: 6, y: 2)
+    }
+}
+
+#Preview {
+    HistoryView()
+        .environment(NFCManager())
+}
