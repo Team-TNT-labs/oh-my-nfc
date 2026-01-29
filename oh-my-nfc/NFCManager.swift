@@ -85,8 +85,8 @@ class NFCManager: NSObject {
             return NFCRecord(type: .url, content: url.absoluteString)
         }
 
-        if let (text, _) = record.wellKnownTypeTextPayload(),
-           let text, !text.isEmpty {
+        let (text, _) = record.wellKnownTypeTextPayload()
+        if let text, !text.isEmpty {
             return NFCRecord(type: .text, content: text)
         }
 

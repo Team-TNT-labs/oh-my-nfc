@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		AA000001000000000000000A /* CoreNFC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000F1 /* CoreNFC.framework */; };
+		AA00000100000000000000S1 /* oh_my_nfcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B1 /* oh_my_nfcApp.swift */; };
+		AA00000100000000000000S2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B2 /* ContentView.swift */; };
+		AA00000100000000000000S3 /* NFCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B3 /* NFCManager.swift */; };
+		AA00000100000000000000S4 /* NFCRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B4 /* NFCRecord.swift */; };
+		AA00000100000000000000S5 /* ReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B5 /* ReadView.swift */; };
+		AA00000100000000000000S6 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B6 /* WriteView.swift */; };
+		AA00000100000000000000S7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000B7 /* HistoryView.swift */; };
+		AA00000100000000000000R1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BA /* Assets.xcassets */; };
+		C7BB5DD32F2B06F900BE4CA2 /* ohmynfc.icon in Resources */ = {isa = PBXBuildFile; fileRef = C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +32,7 @@
 		AA00000100000000000000B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA00000100000000000000BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA00000100000000000000F1 /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
+		C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = ohmynfc.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,7 @@
 				AA00000100000000000000D3 /* Views */,
 				AA00000100000000000000B8 /* oh-my-nfc.entitlements */,
 				AA00000100000000000000B9 /* Info.plist */,
+				C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */,
 				AA00000100000000000000BA /* Assets.xcassets */,
 			);
 			path = "oh-my-nfc";
@@ -156,6 +167,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA00000100000000000000R1 /* Assets.xcassets in Resources */,
+				C7BB5DD32F2B06F900BE4CA2 /* ohmynfc.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +179,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA00000100000000000000S1 /* oh_my_nfcApp.swift in Sources */,
+				AA00000100000000000000S2 /* ContentView.swift in Sources */,
+				AA00000100000000000000S3 /* NFCManager.swift in Sources */,
+				AA00000100000000000000S4 /* NFCRecord.swift in Sources */,
+				AA00000100000000000000S5 /* ReadView.swift in Sources */,
+				AA00000100000000000000S6 /* WriteView.swift in Sources */,
+				AA00000100000000000000S7 /* HistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +316,7 @@
 		AA00000100000000000000F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = ohmynfc;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "oh-my-nfc/oh-my-nfc.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -307,11 +327,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "oh-my-nfc/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "oh-my-nfc";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC 태그를 읽고 쓰기 위해 NFC 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,7 +350,7 @@
 		AA00000100000000000000F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = ohmynfc;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "oh-my-nfc/oh-my-nfc.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -340,11 +361,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "oh-my-nfc/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "oh-my-nfc";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC 태그를 읽고 쓰기 위해 NFC 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
