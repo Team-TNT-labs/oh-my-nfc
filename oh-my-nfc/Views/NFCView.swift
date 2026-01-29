@@ -8,7 +8,6 @@ struct NFCView: View {
     @State private var selectedType: WriteType = .text
     @State private var savedRecordID: UUID?
     @FocusState private var isFocused: Bool
-    @Namespace private var typeSelector
 
     enum WriteType: String, CaseIterable {
         case text = "텍스트"
@@ -143,39 +142,17 @@ struct NFCView: View {
 
             VStack(spacing: 16) {
                 // Type selector
-                HStack(spacing: 4) {
-                    ForEach(WriteType.allCases, id: \.self) { type in
-                        Button {
-                            withAnimation(.snappy(duration: 0.3)) {
-                                selectedType = type
-                                writeText = ""
-                            }
-                        } label: {
-                            HStack(spacing: 6) {
-                                Image(systemName: type.icon)
-                                Text(type.rawValue)
-                            }
-                            .font(.subheadline.weight(.medium))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 11)
-                            .contentShape(.capsule)
-                            .background {
-                                if selectedType == type {
-                                    Capsule()
-                                        .fill(Color(.systemBackground))
-                                        .matchedGeometryEffect(id: "typeSelector", in: typeSelector)
-                                }
-                            }
-                            .foregroundStyle(selectedType == type ? .primary : .tertiary)
-                        }
-                        .buttonStyle(.plain)
+                Picker("타입", selection: Binding(
+                    get: { selectedType },
+                    set: { newValue in
+                        selectedType = newValue
+                        writeText = ""
                     }
+                )) {
+                    Text("텍스트").tag(WriteType.text)
+                    Text("URL").tag(WriteType.url)
                 }
-                .padding(4)
-                .background(
-                    Color(.tertiarySystemGroupedBackground),
-                    in: .capsule
-                )
+                .pickerStyle(.segmented)
 
                 // Input
                 VStack(alignment: .trailing, spacing: 6) {

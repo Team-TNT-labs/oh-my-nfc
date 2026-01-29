@@ -192,7 +192,6 @@ struct SavedTagEditView: View {
     @State private var name = ""
     @State private var content = ""
     @State private var type: NFCRecord.RecordType = .text
-    @Namespace private var typeSelector
 
     private var isEditing: Bool {
         if case .edit = mode { return true }
@@ -207,41 +206,11 @@ struct SavedTagEditView: View {
                 }
 
                 Section("타입") {
-                    HStack(spacing: 4) {
-                        ForEach([NFCRecord.RecordType.text, .url], id: \.self) { t in
-                            Button {
-                                withAnimation(.snappy(duration: 0.3)) {
-                                    type = t
-                                }
-                            } label: {
-                                HStack(spacing: 6) {
-                                    Image(systemName: t == .text ? "doc.text" : "link")
-                                    Text(t.label)
-                                }
-                                .font(.subheadline.weight(.medium))
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 11)
-                                .contentShape(.capsule)
-                                .background {
-                                    if type == t {
-                                        Capsule()
-                                            .fill(Color(.systemBackground))
-                                            .matchedGeometryEffect(id: "editTypeSelector", in: typeSelector)
-                                    }
-                                }
-                                .foregroundStyle(type == t ? .primary : .tertiary)
-                            }
-                            .buttonStyle(.plain)
-                        }
+                    Picker("타입", selection: $type) {
+                        Text("텍스트").tag(NFCRecord.RecordType.text)
+                        Text("URL").tag(NFCRecord.RecordType.url)
                     }
-                    .padding(4)
-                    .background(
-                        Color(.tertiarySystemGroupedBackground),
-                        in: .capsule
-                    )
-                    .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets())
-                    .padding(.horizontal, -4)
+                    .pickerStyle(.segmented)
                 }
 
                 Section("내용") {
