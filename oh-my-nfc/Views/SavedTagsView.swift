@@ -215,13 +215,27 @@ struct SavedTagEditView: View {
 
                 Section("내용") {
                     if type == .url {
-                        TextField("https://example.com", text: $content)
-                            .keyboardType(.URL)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
+                        TextField(
+                            "",
+                            text: $content,
+                            prompt: Text("https://example.com")
+                                .foregroundStyle(.gray.opacity(0.5))
+                        )
+                        .keyboardType(.URL)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
                     } else {
-                        TextEditor(text: $content)
-                            .frame(minHeight: 80)
+                        ZStack(alignment: .topLeading) {
+                            TextEditor(text: $content)
+                                .frame(minHeight: 80)
+                            if content.isEmpty {
+                                Text("태그에 저장할 텍스트를 입력하세요")
+                                    .foregroundStyle(.gray.opacity(0.5))
+                                    .padding(.top, 8)
+                                    .padding(.leading, 5)
+                                    .allowsHitTesting(false)
+                            }
+                        }
                     }
                 }
             }
