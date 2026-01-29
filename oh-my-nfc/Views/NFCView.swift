@@ -163,7 +163,7 @@ struct NFCView: View {
                             .padding(10)
                             .scrollContentBackground(.hidden)
                             .background(
-                                Color(.tertiarySystemGroupedBackground),
+                                Color(.systemBackground),
                                 in: .rect(cornerRadius: 12)
                             )
                             .overlay(alignment: .topLeading) {
@@ -183,7 +183,7 @@ struct NFCView: View {
                             .autocorrectionDisabled()
                             .padding(14)
                             .background(
-                                Color(.tertiarySystemGroupedBackground),
+                                Color(.systemBackground),
                                 in: .rect(cornerRadius: 12)
                             )
                     }
@@ -227,7 +227,7 @@ struct NFCView: View {
                                     endPoint: .trailing
                                 )
                             ),
-                        in: .rect(cornerRadius: 14)
+                        in: .capsule
                     )
                     .foregroundStyle(writeText.isEmpty ? AnyShapeStyle(.secondary) : AnyShapeStyle(.white))
                     .shadow(
