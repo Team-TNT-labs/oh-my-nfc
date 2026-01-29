@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ReadView: View {
     @Environment(NFCManager.self) private var nfcManager
+    @Environment(SavedTagStore.self) private var savedTagStore
+    @State private var savedRecordID: UUID?
 
     var body: some View {
         NavigationStack {
@@ -87,7 +89,23 @@ struct ReadView: View {
                 .padding(.horizontal, 4)
 
             ForEach(nfcManager.scannedRecords) { record in
-                RecordCard(record: record)
+                RecordCard(record: record) {
+                    let tag = SavedTag(from: record)
+                    savedTagStore.add(tag)
+                    savedRecordID = record.id
+                }
+                .overlay(alignment: .topTrailing) {
+                    if savedRecordID == record.id {
+                        Text("저장됨")
+                            .font(.caption2.weight(.bold))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(.green, in: .capsule)
+                            .padding(8)
+                            .transition(.scale.combined(with: .opacity))
+                    }
+                }
             }
         }
     }
@@ -97,6 +115,7 @@ struct ReadView: View {
 
 struct RecordCard: View {
     let record: NFCRecord
+    var onSave: (() -> Void)?
 
     var body: some View {
         HStack(spacing: 14) {
@@ -121,6 +140,16 @@ struct RecordCard: View {
 
             Spacer()
 
+            if let onSave {
+                Button {
+                    onSave()
+                } label: {
+                    Image(systemName: "square.and.arrow.down")
+                        .font(.title3)
+                        .foregroundStyle(.orange)
+                }
+            }
+
             if record.type == .url {
                 Button {
                     if let url = URL(string: record.content) {
@@ -142,4 +171,5 @@ struct RecordCard: View {
 #Preview {
     ReadView()
         .environment(NFCManager())
+        .environment(SavedTagStore())
 }

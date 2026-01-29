@@ -9,6 +9,9 @@ struct ContentView: View {
             Tab("쓰기", systemImage: "square.and.pencil") {
                 WriteView()
             }
+            Tab("저장", systemImage: "tag") {
+                SavedTagsView()
+            }
             Tab("기록", systemImage: "clock.arrow.circlepath") {
                 HistoryView()
             }
@@ -20,4 +23,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(NFCManager())
+        .environment(SavedTagStore())
 }
