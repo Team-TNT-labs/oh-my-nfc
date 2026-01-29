@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct ohMyNfcApp: App {
+struct oh_my_nfcApp: App {
     @State private var nfcManager = NFCManager()
 
     var body: some Scene {

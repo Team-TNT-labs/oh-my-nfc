@@ -11,15 +11,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA00000100000000000000A1 /* ohMyNfc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ohMyNfc.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA00000100000000000000B1 /* ohMyNfcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ohMyNfcApp.swift; sourceTree = "<group>"; };
+		AA00000100000000000000A1 /* oh-my-nfc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "oh-my-nfc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00000100000000000000B1 /* oh_my_nfcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oh_my_nfcApp.swift; sourceTree = "<group>"; };
 		AA00000100000000000000B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000B3 /* NFCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCManager.swift; sourceTree = "<group>"; };
 		AA00000100000000000000B4 /* NFCRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCRecord.swift; sourceTree = "<group>"; };
 		AA00000100000000000000B5 /* ReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000B6 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000B7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		AA00000100000000000000B8 /* ohMyNfc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ohMyNfc.entitlements; sourceTree = "<group>"; };
+		AA00000100000000000000B8 /* oh-my-nfc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "oh-my-nfc.entitlements"; sourceTree = "<group>"; };
 		AA00000100000000000000B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA00000100000000000000BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA00000100000000000000F1 /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
@@ -37,28 +37,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA00000100000000000000D0 /* root */ = {
+		AA00000100000000000000D0 = {
 			isa = PBXGroup;
 			children = (
-				AA00000100000000000000D1 /* ohMyNfc */,
+				AA00000100000000000000D1 /* oh-my-nfc */,
 				AA00000100000000000000D5 /* Frameworks */,
 				AA00000100000000000000D4 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		AA00000100000000000000D1 /* ohMyNfc */ = {
+		AA00000100000000000000D1 /* oh-my-nfc */ = {
 			isa = PBXGroup;
 			children = (
-				AA00000100000000000000B1 /* ohMyNfcApp.swift */,
+				AA00000100000000000000B1 /* oh_my_nfcApp.swift */,
 				AA00000100000000000000B2 /* ContentView.swift */,
 				AA00000100000000000000B3 /* NFCManager.swift */,
 				AA00000100000000000000D2 /* Models */,
 				AA00000100000000000000D3 /* Views */,
-				AA00000100000000000000B8 /* ohMyNfc.entitlements */,
+				AA00000100000000000000B8 /* oh-my-nfc.entitlements */,
 				AA00000100000000000000B9 /* Info.plist */,
 				AA00000100000000000000BA /* Assets.xcassets */,
 			);
-			path = ohMyNfc;
+			path = "oh-my-nfc";
 			sourceTree = "<group>";
 		};
 		AA00000100000000000000D2 /* Models */ = {
@@ -82,7 +82,7 @@
 		AA00000100000000000000D4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA00000100000000000000A1 /* ohMyNfc.app */,
+				AA00000100000000000000A1 /* oh-my-nfc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,9 +98,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA00000100000000000000E1 /* ohMyNfc */ = {
+		AA00000100000000000000E1 /* oh-my-nfc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA00000100000000000000E4 /* Build configuration list for PBXNativeTarget "ohMyNfc" */;
+			buildConfigurationList = AA00000100000000000000E4 /* Build configuration list for PBXNativeTarget "oh-my-nfc" */;
 			buildPhases = (
 				AA00000100000000000000C0 /* Sources */,
 				AA00000100000000000000C1 /* Frameworks */,
@@ -110,13 +110,11 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-			);
-			name = ohMyNfc;
+			name = "oh-my-nfc";
 			packageProductDependencies = (
 			);
-			productName = ohMyNfc;
-			productReference = AA00000100000000000000A1 /* ohMyNfc.app */;
+			productName = "oh-my-nfc";
+			productReference = AA00000100000000000000A1 /* oh-my-nfc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -134,21 +132,21 @@
 					};
 				};
 			};
-			buildConfigurationList = AA00000100000000000000E3 /* Build configuration list for PBXProject "ohMyNfc" */;
+			buildConfigurationList = AA00000100000000000000E3 /* Build configuration list for PBXProject "oh-my-nfc" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = AA00000100000000000000D0 /* root */;
+			mainGroup = AA00000100000000000000D0;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AA00000100000000000000D4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA00000100000000000000E1 /* ohMyNfc */,
+				AA00000100000000000000E1 /* oh-my-nfc */,
 			);
 		};
 /* End PBXProject section */
@@ -300,14 +298,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ohMyNfc/ohMyNfc.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "oh-my-nfc/oh-my-nfc.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = RP5GZ99V95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ohMyNfc/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ohMyNfc;
+				INFOPLIST_FILE = "oh-my-nfc/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "oh-my-nfc";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -318,8 +317,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tntlabs.ohMyNfc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tntlabs.oh-my-nfc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -331,14 +331,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ohMyNfc/ohMyNfc.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "oh-my-nfc/oh-my-nfc.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = RP5GZ99V95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ohMyNfc/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ohMyNfc;
+				INFOPLIST_FILE = "oh-my-nfc/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "oh-my-nfc";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -349,8 +350,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tntlabs.ohMyNfc;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tntlabs.oh-my-nfc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -360,7 +362,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA00000100000000000000E3 /* Build configuration list for PBXProject "ohMyNfc" */ = {
+		AA00000100000000000000E3 /* Build configuration list for PBXProject "oh-my-nfc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA00000100000000000000F2 /* Debug */,
@@ -369,7 +371,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA00000100000000000000E4 /* Build configuration list for PBXNativeTarget "ohMyNfc" */ = {
+		AA00000100000000000000E4 /* Build configuration list for PBXNativeTarget "oh-my-nfc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA00000100000000000000F4 /* Debug */,
@@ -379,7 +381,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
 	};
 	rootObject = AA00000100000000000000E0 /* Project object */;
 }
