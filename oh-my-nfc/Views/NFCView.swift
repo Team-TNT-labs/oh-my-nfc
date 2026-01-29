@@ -163,7 +163,7 @@ struct NFCView: View {
                             .padding(10)
                             .scrollContentBackground(.hidden)
                             .background(
-                                Color(.systemGray6),
+                                colorScheme == .dark ? Color(.systemGray5) : Color(.systemGray6),
                                 in: .rect(cornerRadius: 12)
                             )
                             .overlay(alignment: .topLeading) {
@@ -183,7 +183,7 @@ struct NFCView: View {
                             .autocorrectionDisabled()
                             .padding(14)
                             .background(
-                                Color(.systemGray6),
+                                colorScheme == .dark ? Color(.systemGray5) : Color(.systemGray6),
                                 in: .rect(cornerRadius: 12)
                             )
                     }
