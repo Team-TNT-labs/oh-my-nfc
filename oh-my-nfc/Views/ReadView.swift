@@ -86,7 +86,7 @@ struct ReadView: View {
     private var resultsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("스캔 결과")
-                .font(.headline)
+                .font(.title3.weight(.semibold))
                 .padding(.horizontal, 4)
 
             ForEach(nfcManager.scannedRecords) { record in
@@ -121,20 +121,20 @@ struct RecordCard: View {
     var body: some View {
         HStack(spacing: 14) {
             Image(systemName: record.type.icon)
-                .font(.title3.weight(.medium))
+                .font(.title2.weight(.medium))
                 .foregroundStyle(.blue)
-                .frame(width: 40, height: 40)
-                .background(.blue.opacity(0.12), in: .rect(cornerRadius: 10))
+                .frame(width: 46, height: 46)
+                .background(.blue.opacity(0.12), in: .rect(cornerRadius: 12))
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(record.type.label)
-                    .font(.caption2.weight(.bold))
+                    .font(.caption.weight(.bold))
                     .foregroundStyle(.secondary)
                     .textCase(.uppercase)
                     .tracking(0.5)
 
                 Text(record.content)
-                    .font(.subheadline)
+                    .font(.body)
                     .foregroundStyle(.primary)
                     .lineLimit(3)
                     .textSelection(.enabled)
@@ -148,9 +148,9 @@ struct RecordCard: View {
                         onSave()
                     } label: {
                         Image(systemName: "square.and.arrow.down")
-                            .font(.subheadline.weight(.medium))
+                            .font(.body.weight(.medium))
                             .foregroundStyle(.orange)
-                            .frame(width: 32, height: 32)
+                            .frame(width: 36, height: 36)
                             .background(.orange.opacity(0.12), in: .rect(cornerRadius: 8))
                     }
                 }
@@ -162,9 +162,9 @@ struct RecordCard: View {
                         }
                     } label: {
                         Image(systemName: "safari")
-                            .font(.subheadline.weight(.medium))
+                            .font(.body.weight(.medium))
                             .foregroundStyle(.blue)
-                            .frame(width: 32, height: 32)
+                            .frame(width: 36, height: 36)
                             .background(.blue.opacity(0.12), in: .rect(cornerRadius: 8))
                     }
                 }

@@ -9,7 +9,7 @@ struct SectionTitle: View {
 
     var body: some View {
         Text(title)
-            .font(.title2.weight(.bold))
+            .font(.title.weight(.bold))
             .fontDesign(.rounded)
             .frame(maxWidth: .infinity, alignment: .leading)
     }

@@ -69,28 +69,28 @@ struct NFCView: View {
                                     endPoint: .bottomTrailing
                                 )
                             )
-                            .frame(width: 48, height: 48)
+                            .frame(width: 54, height: 54)
 
                         Image(systemName: "wave.3.right")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: 24, weight: .semibold))
                             .foregroundStyle(.white)
                             .symbolEffect(.variableColor.iterative, isActive: nfcManager.isScanning)
                     }
 
                     VStack(alignment: .leading, spacing: 3) {
                         Text(nfcManager.isScanning ? "스캔 중..." : "태그 스캔하기")
-                            .font(.subheadline.weight(.semibold))
+                            .font(.body.weight(.semibold))
                             .fontDesign(.rounded)
                             .foregroundStyle(.primary)
                         Text("iPhone 상단을 NFC 태그에 대세요")
-                            .font(.caption)
+                            .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
 
                     Spacer()
 
                     Image(systemName: "chevron.right")
-                        .font(.caption.weight(.bold))
+                        .font(.subheadline.weight(.bold))
                         .foregroundStyle(.quaternary)
                 }
                 .cardStyle()
@@ -103,7 +103,7 @@ struct NFCView: View {
             if !nfcManager.scannedRecords.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
                     Label("스캔 결과", systemImage: "checkmark.shield")
-                        .font(.caption.weight(.semibold))
+                        .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                         .textCase(.uppercase)
                         .padding(.leading, 4)
@@ -152,12 +152,12 @@ struct NFCView: View {
                         } label: {
                             HStack(spacing: 6) {
                                 Image(systemName: type.icon)
-                                    .font(.caption.weight(.semibold))
+                                    .font(.subheadline.weight(.semibold))
                                 Text(type.rawValue)
-                                    .font(.subheadline.weight(.medium))
+                                    .font(.body.weight(.medium))
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
+                            .padding(.vertical, 12)
                             .background(
                                 selectedType == type
                                     ? AnyShapeStyle(.blue.gradient)
@@ -210,7 +210,7 @@ struct NFCView: View {
                     }
 
                     Text("\(writeText.utf8.count) bytes")
-                        .font(.caption2)
+                        .font(.caption)
                         .foregroundStyle(.quaternary)
                         .padding(.trailing, 4)
                 }
@@ -228,13 +228,13 @@ struct NFCView: View {
                 } label: {
                     HStack(spacing: 8) {
                         Image(systemName: "antenna.radiowaves.left.and.right")
-                            .font(.subheadline.weight(.semibold))
+                            .font(.body.weight(.semibold))
                         Text("태그에 쓰기")
-                            .font(.subheadline.weight(.bold))
+                            .font(.body.weight(.bold))
                             .fontDesign(.rounded)
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 16)
                     .background(
                         writeText.isEmpty
                             ? AnyShapeStyle(Color(.quaternarySystemFill))
@@ -269,7 +269,7 @@ struct NFCView: View {
     private var statusMessages: some View {
         if !nfcManager.message.isEmpty {
             Label(nfcManager.message, systemImage: "checkmark.circle.fill")
-                .font(.caption.weight(.medium))
+                .font(.subheadline.weight(.medium))
                 .foregroundStyle(.green)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
@@ -278,7 +278,7 @@ struct NFCView: View {
 
         if !nfcManager.lastError.isEmpty {
             Label(nfcManager.lastError, systemImage: "exclamationmark.triangle.fill")
-                .font(.caption.weight(.medium))
+                .font(.subheadline.weight(.medium))
                 .foregroundStyle(.red)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)

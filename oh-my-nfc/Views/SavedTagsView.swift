@@ -17,7 +17,7 @@ struct SavedTagsView: View {
                             showingAdd = true
                         } label: {
                             Image(systemName: "plus.circle.fill")
-                                .font(.title2)
+                                .font(.title)
                                 .foregroundStyle(.blue)
                         }
                     }
@@ -46,12 +46,12 @@ struct SavedTagsView: View {
     private var emptyState: some View {
         VStack(spacing: 12) {
             Image(systemName: "tag")
-                .font(.system(size: 40))
+                .font(.system(size: 48))
                 .foregroundStyle(.secondary)
             Text("저장된 태그 없음")
-                .font(.headline)
+                .font(.title3)
             Text("자주 사용하는 태그 데이터를 저장해두고\n바로 NFC에 쓸 수 있습니다.")
-                .font(.subheadline)
+                .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
             Button("새 태그 만들기") {
@@ -92,17 +92,17 @@ struct SavedTagRow: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 12) {
                 Image(systemName: tag.type.icon)
-                    .font(.subheadline.weight(.medium))
+                    .font(.body.weight(.medium))
                     .foregroundStyle(.orange)
-                    .frame(width: 34, height: 34)
-                    .background(.orange.opacity(0.12), in: .rect(cornerRadius: 8))
+                    .frame(width: 40, height: 40)
+                    .background(.orange.opacity(0.12), in: .rect(cornerRadius: 10))
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(tag.name)
-                        .font(.subheadline.weight(.semibold))
+                        .font(.body.weight(.semibold))
 
                     Text(tag.content)
-                        .font(.caption)
+                        .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
@@ -110,9 +110,9 @@ struct SavedTagRow: View {
                 Spacer()
 
                 Text(tag.type.label)
-                    .font(.caption2.weight(.bold))
-                    .padding(.horizontal, 7)
-                    .padding(.vertical, 3)
+                    .font(.caption.weight(.bold))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
                     .background(.orange.opacity(0.12), in: .capsule)
                     .foregroundStyle(.orange)
             }
@@ -121,15 +121,15 @@ struct SavedTagRow: View {
                 Button {
                     onWrite()
                 } label: {
-                    HStack(spacing: 4) {
+                    HStack(spacing: 5) {
                         Image(systemName: "antenna.radiowaves.left.and.right")
-                            .font(.caption2.weight(.bold))
+                            .font(.caption.weight(.bold))
                         Text("쓰기")
-                            .font(.caption.weight(.semibold))
+                            .font(.subheadline.weight(.semibold))
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
-                    .background(.blue.gradient, in: .rect(cornerRadius: 8))
+                    .padding(.vertical, 10)
+                    .background(.blue.gradient, in: .rect(cornerRadius: 10))
                     .foregroundStyle(.white)
                 }
                 .buttonStyle(.plain)
@@ -137,15 +137,15 @@ struct SavedTagRow: View {
                 Button {
                     onEdit()
                 } label: {
-                    HStack(spacing: 4) {
+                    HStack(spacing: 5) {
                         Image(systemName: "pencil")
-                            .font(.caption2.weight(.bold))
+                            .font(.caption.weight(.bold))
                         Text("편집")
-                            .font(.caption.weight(.semibold))
+                            .font(.subheadline.weight(.semibold))
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
-                    .background(Color(.tertiarySystemGroupedBackground), in: .rect(cornerRadius: 8))
+                    .padding(.vertical, 10)
+                    .background(Color(.tertiarySystemGroupedBackground), in: .rect(cornerRadius: 10))
                     .foregroundStyle(.primary)
                 }
                 .buttonStyle(.plain)
@@ -154,10 +154,10 @@ struct SavedTagRow: View {
                     onDelete()
                 } label: {
                     Image(systemName: "trash")
-                        .font(.caption.weight(.semibold))
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 14)
-                        .background(.red.opacity(0.1), in: .rect(cornerRadius: 8))
+                        .font(.subheadline.weight(.semibold))
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 16)
+                        .background(.red.opacity(0.1), in: .rect(cornerRadius: 10))
                         .foregroundStyle(.red)
                 }
                 .buttonStyle(.plain)
