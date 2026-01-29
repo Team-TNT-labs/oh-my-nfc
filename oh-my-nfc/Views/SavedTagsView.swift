@@ -89,13 +89,13 @@ struct SavedTagRow: View {
     let onDelete: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 12) {
                 Image(systemName: tag.type.icon)
-                    .font(.body.weight(.medium))
+                    .font(.subheadline.weight(.medium))
                     .foregroundStyle(.orange)
-                    .frame(width: 36, height: 36)
-                    .background(.orange.opacity(0.1), in: .circle)
+                    .frame(width: 34, height: 34)
+                    .background(.orange.opacity(0.12), in: .rect(cornerRadius: 8))
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(tag.name)
@@ -109,14 +109,12 @@ struct SavedTagRow: View {
 
                 Spacer()
 
-                HStack(spacing: 4) {
-                    Text(tag.type.label)
-                        .font(.caption2.weight(.semibold))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(.orange.opacity(0.1), in: .capsule)
-                        .foregroundStyle(.orange)
-                }
+                Text(tag.type.label)
+                    .font(.caption2.weight(.bold))
+                    .padding(.horizontal, 7)
+                    .padding(.vertical, 3)
+                    .background(.orange.opacity(0.12), in: .capsule)
+                    .foregroundStyle(.orange)
             }
 
             HStack(spacing: 8) {
@@ -124,13 +122,14 @@ struct SavedTagRow: View {
                     onWrite()
                 } label: {
                     HStack(spacing: 4) {
-                        Image(systemName: "wave.3.right")
+                        Image(systemName: "antenna.radiowaves.left.and.right")
+                            .font(.caption2.weight(.bold))
                         Text("쓰기")
+                            .font(.caption.weight(.semibold))
                     }
-                    .font(.caption.weight(.semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
-                    .background(.blue, in: .rect(cornerRadius: 8))
+                    .background(.blue.gradient, in: .rect(cornerRadius: 8))
                     .foregroundStyle(.white)
                 }
                 .buttonStyle(.plain)
@@ -140,12 +139,13 @@ struct SavedTagRow: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "pencil")
+                            .font(.caption2.weight(.bold))
                         Text("편집")
+                            .font(.caption.weight(.semibold))
                     }
-                    .font(.caption.weight(.semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
-                    .background(.secondary.opacity(0.15), in: .rect(cornerRadius: 8))
+                    .background(Color(.tertiarySystemGroupedBackground), in: .rect(cornerRadius: 8))
                     .foregroundStyle(.primary)
                 }
                 .buttonStyle(.plain)
@@ -163,9 +163,7 @@ struct SavedTagRow: View {
                 .buttonStyle(.plain)
             }
         }
-        .padding()
-        .background(.background, in: .rect(cornerRadius: 14))
-        .shadow(color: .black.opacity(0.03), radius: 6, y: 2)
+        .cardStyle()
     }
 }
 

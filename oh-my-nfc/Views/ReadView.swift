@@ -121,51 +121,56 @@ struct RecordCard: View {
     var body: some View {
         HStack(spacing: 14) {
             Image(systemName: record.type.icon)
-                .font(.title2)
+                .font(.title3.weight(.medium))
                 .foregroundStyle(.blue)
-                .frame(width: 44, height: 44)
-                .background(.blue.opacity(0.1), in: .circle)
+                .frame(width: 40, height: 40)
+                .background(.blue.opacity(0.12), in: .rect(cornerRadius: 10))
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(record.type.label)
-                    .font(.caption.weight(.semibold))
+                    .font(.caption2.weight(.bold))
                     .foregroundStyle(.secondary)
                     .textCase(.uppercase)
+                    .tracking(0.5)
 
                 Text(record.content)
-                    .font(.body)
+                    .font(.subheadline)
                     .foregroundStyle(.primary)
                     .lineLimit(3)
                     .textSelection(.enabled)
             }
 
-            Spacer()
+            Spacer(minLength: 4)
 
-            if let onSave {
-                Button {
-                    onSave()
-                } label: {
-                    Image(systemName: "square.and.arrow.down")
-                        .font(.title3)
-                        .foregroundStyle(.orange)
-                }
-            }
-
-            if record.type == .url {
-                Button {
-                    if let url = URL(string: record.content) {
-                        UIApplication.shared.open(url)
+            HStack(spacing: 10) {
+                if let onSave {
+                    Button {
+                        onSave()
+                    } label: {
+                        Image(systemName: "square.and.arrow.down")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.orange)
+                            .frame(width: 32, height: 32)
+                            .background(.orange.opacity(0.12), in: .rect(cornerRadius: 8))
                     }
-                } label: {
-                    Image(systemName: "safari")
-                        .font(.title3)
-                        .foregroundStyle(.blue)
+                }
+
+                if record.type == .url {
+                    Button {
+                        if let url = URL(string: record.content) {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        Image(systemName: "safari")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.blue)
+                            .frame(width: 32, height: 32)
+                            .background(.blue.opacity(0.12), in: .rect(cornerRadius: 8))
+                    }
                 }
             }
         }
-        .padding()
-        .background(.background, in: .rect(cornerRadius: 14))
-        .shadow(color: .black.opacity(0.04), radius: 8, y: 2)
+        .cardStyle()
     }
 }
 

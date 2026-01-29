@@ -72,12 +72,12 @@ struct HistoryRow: View {
     let record: NFCRecord
 
     var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 12) {
             Image(systemName: record.type.icon)
-                .font(.body.weight(.medium))
+                .font(.subheadline.weight(.medium))
                 .foregroundStyle(.blue)
-                .frame(width: 36, height: 36)
-                .background(.blue.opacity(0.1), in: .circle)
+                .frame(width: 34, height: 34)
+                .background(.blue.opacity(0.12), in: .rect(cornerRadius: 8))
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(record.content)
@@ -87,14 +87,14 @@ struct HistoryRow: View {
 
                 HStack(spacing: 6) {
                     Text(record.type.label)
-                        .font(.caption2.weight(.semibold))
+                        .font(.caption2.weight(.bold))
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
-                        .background(.blue.opacity(0.1), in: .capsule)
+                        .background(.blue.opacity(0.12), in: .capsule)
                         .foregroundStyle(.blue)
 
                     Text(record.date.formatted(.relative(presentation: .named)))
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundStyle(.tertiary)
                 }
             }
@@ -105,14 +105,14 @@ struct HistoryRow: View {
                 UIPasteboard.general.string = record.content
             } label: {
                 Image(systemName: "doc.on.doc")
-                    .font(.subheadline)
+                    .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
+                    .frame(width: 30, height: 30)
+                    .background(Color(.tertiarySystemGroupedBackground), in: .rect(cornerRadius: 7))
             }
             .buttonStyle(.plain)
         }
-        .padding()
-        .background(.background, in: .rect(cornerRadius: 14))
-        .shadow(color: .black.opacity(0.03), radius: 6, y: 2)
+        .cardStyle()
     }
 }
 
