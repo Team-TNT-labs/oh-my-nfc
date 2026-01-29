@@ -158,12 +158,11 @@ struct NFCView: View {
                             .font(.subheadline.weight(.medium))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 11)
+                            .contentShape(.capsule)
                             .background {
                                 if selectedType == type {
                                     Capsule()
                                         .fill(Color(.systemBackground))
-                                        .shadow(color: .black.opacity(0.1), radius: 4, y: 2)
-                                        .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
                                         .matchedGeometryEffect(id: "typeSelector", in: typeSelector)
                                 }
                             }
