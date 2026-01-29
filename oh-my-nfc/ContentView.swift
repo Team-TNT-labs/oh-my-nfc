@@ -3,11 +3,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Tab("읽기", systemImage: "sensor.tag.radiowaves.forward") {
-                ReadView()
-            }
-            Tab("쓰기", systemImage: "square.and.pencil") {
-                WriteView()
+            Tab("NFC", systemImage: "sensor.tag.radiowaves.forward") {
+                NFCView()
             }
             Tab("저장", systemImage: "tag") {
                 SavedTagsView()
