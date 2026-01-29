@@ -13,6 +13,7 @@ struct HistoryView: View {
                 }
             }
             .navigationTitle("스캔 기록")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(.systemGroupedBackground))
             .toolbar {
                 if !nfcManager.scanHistory.isEmpty {

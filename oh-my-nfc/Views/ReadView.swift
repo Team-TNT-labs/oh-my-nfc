@@ -18,6 +18,7 @@ struct ReadView: View {
                 .padding()
             }
             .navigationTitle("NFC 읽기")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(.systemGroupedBackground))
         }
     }

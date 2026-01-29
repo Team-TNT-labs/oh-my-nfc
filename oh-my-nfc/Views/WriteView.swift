@@ -37,6 +37,7 @@ struct WriteView: View {
                 .padding()
             }
             .navigationTitle("NFC 쓰기")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(.systemGroupedBackground))
             .onTapGesture {
                 isFocused = false

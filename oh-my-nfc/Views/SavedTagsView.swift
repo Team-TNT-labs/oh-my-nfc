@@ -16,6 +16,7 @@ struct SavedTagsView: View {
                 }
             }
             .navigationTitle("저장된 태그")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(.systemGroupedBackground))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
