@@ -9,7 +9,7 @@ struct ReadView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    SectionTitle("NFC 읽기")
+                    SectionTitle("NFC Read")
                     scanButton
                     statusSection
                     if !nfcManager.scannedRecords.isEmpty {
@@ -42,11 +42,11 @@ struct ReadView: View {
                         .symbolEffect(.variableColor.iterative, isActive: nfcManager.isScanning)
                 }
 
-                Text(nfcManager.isScanning ? "스캔 중..." : "태그 스캔하기")
+                Text(nfcManager.isScanning ? String(localized: "Scanning...") : String(localized: "Scan Tag"))
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(.primary)
 
-                Text("iPhone 상단을 NFC 태그에 가까이 대세요")
+                Text("Hold the top of your iPhone near an NFC tag")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -85,7 +85,7 @@ struct ReadView: View {
 
     private var resultsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("스캔 결과")
+            Text("Scan Results")
                 .font(.title3.weight(.semibold))
                 .padding(.horizontal, 4)
 
@@ -97,7 +97,7 @@ struct ReadView: View {
                 }
                 .overlay(alignment: .topTrailing) {
                     if savedRecordID == record.id {
-                        Text("저장됨")
+                        Text("Saved")
                             .font(.caption2.weight(.bold))
                             .foregroundStyle(.white)
                             .padding(.horizontal, 8)

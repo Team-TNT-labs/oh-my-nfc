@@ -7,8 +7,14 @@ struct WriteView: View {
     @FocusState private var isFocused: Bool
 
     enum WriteType: String, CaseIterable {
-        case text = "텍스트"
-        case url = "URL"
+        case text, url
+
+        var label: String {
+            switch self {
+            case .text: String(localized: "Text")
+            case .url: "URL"
+            }
+        }
 
         var icon: String {
             switch self {
@@ -19,7 +25,7 @@ struct WriteView: View {
 
         var placeholder: String {
             switch self {
-            case .text: "태그에 쓸 텍스트를 입력하세요"
+            case .text: String(localized: "Enter text to write to tag")
             case .url: "https://example.com"
             }
         }
@@ -29,7 +35,7 @@ struct WriteView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    SectionTitle("NFC 쓰기")
+                    SectionTitle("NFC Write")
                     typeSelector
                     inputSection
                     writeButton
@@ -58,7 +64,7 @@ struct WriteView: View {
                 } label: {
                     HStack(spacing: 8) {
                         Image(systemName: type.icon)
-                        Text(type.rawValue)
+                        Text(type.label)
                             .fontWeight(.medium)
                     }
                     .frame(maxWidth: .infinity)
@@ -82,7 +88,7 @@ struct WriteView: View {
 
     private var inputSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("내용", systemImage: selectedType.icon)
+            Label("Content", systemImage: selectedType.icon)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
 
@@ -137,7 +143,7 @@ struct WriteView: View {
             HStack(spacing: 10) {
                 Image(systemName: "square.and.pencil")
                     .font(.title3)
-                Text("태그에 쓰기")
+                Text("Write to Tag")
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)

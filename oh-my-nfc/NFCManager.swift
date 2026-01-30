@@ -3,8 +3,12 @@ import SwiftUI
 
 @Observable
 class NFCManager: NSObject {
+    private static let historyKey = "scanHistory"
+
     var scannedRecords: [NFCRecord] = []
-    var scanHistory: [NFCRecord] = []
+    var scanHistory: [NFCRecord] = [] {
+        didSet { saveHistory() }
+    }
     var isScanning = false
     var message = ""
     var lastError = ""
@@ -12,6 +16,11 @@ class NFCManager: NSObject {
     private var session: NFCNDEFReaderSession?
     private var writeMessage: NFCNDEFMessage?
     private var isWriteMode = false
+
+    override init() {
+        super.init()
+        loadHistory()
+    }
 
     var isAvailable: Bool {
         NFCNDEFReaderSession.readingAvailable
@@ -21,7 +30,7 @@ class NFCManager: NSObject {
 
     func startScan() {
         guard isAvailable else {
-            lastError = "이 기기에서는 NFC를 사용할 수 없습니다."
+            lastError = String(localized: "NFC is not available on this device.")
             return
         }
         isWriteMode = false
@@ -29,7 +38,7 @@ class NFCManager: NSObject {
         lastError = ""
         message = ""
         session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        session?.alertMessage = "NFC 태그를 iPhone 상단에 가까이 대세요"
+        session?.alertMessage = String(localized: "Hold your iPhone near an NFC tag")
         session?.begin()
         isScanning = true
     }
@@ -38,7 +47,7 @@ class NFCManager: NSObject {
 
     func write(text: String) {
         guard isAvailable else {
-            lastError = "이 기기에서는 NFC를 사용할 수 없습니다."
+            lastError = String(localized: "NFC is not available on this device.")
             return
         }
         isWriteMode = true
@@ -59,13 +68,27 @@ class NFCManager: NSObject {
 
         writeMessage = NFCNDEFMessage(records: [payload])
         session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        session?.alertMessage = "쓸 NFC 태그를 iPhone 상단에 가까이 대세요"
+        session?.alertMessage = String(localized: "Hold your iPhone near an NFC tag to write")
         session?.begin()
         isScanning = true
     }
 
     func clearHistory() {
         scanHistory.removeAll()
+    }
+
+    // MARK: - History Persistence
+
+    private func saveHistory() {
+        if let data = try? JSONEncoder().encode(scanHistory) {
+            UserDefaults.standard.set(data, forKey: Self.historyKey)
+        }
+    }
+
+    private func loadHistory() {
+        guard let data = UserDefaults.standard.data(forKey: Self.historyKey),
+              let decoded = try? JSONDecoder().decode([NFCRecord].self, from: data) else { return }
+        scanHistory = decoded
     }
 
     // MARK: - Helpers
@@ -94,7 +117,7 @@ class NFCManager: NSObject {
             return NFCRecord(type: .unknown, content: payload)
         }
 
-        return NFCRecord(type: .unknown, content: "읽을 수 없는 데이터")
+        return NFCRecord(type: .unknown, content: String(localized: "Unreadable data"))
     }
 }
 
@@ -119,26 +142,26 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
         DispatchQueue.main.async {
             self.scannedRecords = records
             self.scanHistory.insert(contentsOf: records, at: 0)
-            self.message = "\(records.count)개 레코드를 읽었습니다."
+            self.message = String(localized: "Read \(records.count) record(s).")
             self.isScanning = false
         }
     }
 
     func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [any NFCNDEFTag]) {
         guard let tag = tags.first else {
-            session.invalidate(errorMessage: "태그를 찾을 수 없습니다.")
+            session.invalidate(errorMessage: String(localized: "Tag not found."))
             return
         }
 
         session.connect(to: tag) { error in
             if let error {
-                session.invalidate(errorMessage: "연결 실패: \(error.localizedDescription)")
+                session.invalidate(errorMessage: String(localized: "Connection failed: \(error.localizedDescription)"))
                 return
             }
 
             tag.queryNDEFStatus { status, capacity, error in
                 if let error {
-                    session.invalidate(errorMessage: "상태 조회 실패: \(error.localizedDescription)")
+                    session.invalidate(errorMessage: String(localized: "Status check failed: \(error.localizedDescription)"))
                     return
                 }
 
@@ -154,11 +177,11 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
     private func handleRead(session: NFCNDEFReaderSession, tag: NFCNDEFTag, status: NFCNDEFStatus) {
         switch status {
         case .notSupported:
-            session.invalidate(errorMessage: "NDEF를 지원하지 않는 태그입니다.")
+            session.invalidate(errorMessage: String(localized: "This tag does not support NDEF."))
         case .readOnly, .readWrite:
             tag.readNDEF { message, error in
                 if let error {
-                    session.invalidate(errorMessage: "읽기 실패: \(error.localizedDescription)")
+                    session.invalidate(errorMessage: String(localized: "Read failed: \(error.localizedDescription)"))
                     return
                 }
                 if let message {
@@ -166,41 +189,41 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
                     DispatchQueue.main.async {
                         self.scannedRecords = records
                         self.scanHistory.insert(contentsOf: records, at: 0)
-                        self.message = "\(records.count)개 레코드를 읽었습니다."
+                        self.message = String(localized: "Read \(records.count) record(s).")
                     }
                 }
                 session.invalidate()
             }
         @unknown default:
-            session.invalidate(errorMessage: "알 수 없는 태그 상태입니다.")
+            session.invalidate(errorMessage: String(localized: "Unknown tag status."))
         }
     }
 
     private func handleWrite(session: NFCNDEFReaderSession, tag: NFCNDEFTag, status: NFCNDEFStatus, capacity: Int) {
         guard status == .readWrite else {
-            session.invalidate(errorMessage: "이 태그에는 쓸 수 없습니다. (읽기 전용)")
+            session.invalidate(errorMessage: String(localized: "This tag is read-only."))
             return
         }
 
         guard let writeMessage else {
-            session.invalidate(errorMessage: "쓸 데이터가 없습니다.")
+            session.invalidate(errorMessage: String(localized: "No data to write."))
             return
         }
 
         let messageLength = writeMessage.length
         guard messageLength <= capacity else {
-            session.invalidate(errorMessage: "데이터가 너무 큽니다. (\(messageLength)/\(capacity) bytes)")
+            session.invalidate(errorMessage: String(localized: "Data too large. (\(messageLength)/\(capacity) bytes)"))
             return
         }
 
         tag.writeNDEF(writeMessage) { error in
             if let error {
-                session.invalidate(errorMessage: "쓰기 실패: \(error.localizedDescription)")
+                session.invalidate(errorMessage: String(localized: "Write failed: \(error.localizedDescription)"))
             } else {
-                session.alertMessage = "쓰기 완료!"
+                session.alertMessage = String(localized: "Write complete!")
                 session.invalidate()
                 DispatchQueue.main.async {
-                    self.message = "NFC 태그에 성공적으로 기록했습니다."
+                    self.message = String(localized: "Successfully written to NFC tag.")
                     self.isScanning = false
                 }
             }

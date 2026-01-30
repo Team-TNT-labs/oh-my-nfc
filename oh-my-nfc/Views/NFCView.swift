@@ -10,8 +10,14 @@ struct NFCView: View {
     @FocusState private var isFocused: Bool
 
     enum WriteType: String, CaseIterable {
-        case text = "텍스트"
-        case url = "URL"
+        case text, url
+
+        var label: String {
+            switch self {
+            case .text: String(localized: "Text")
+            case .url: "URL"
+            }
+        }
 
         var icon: String {
             switch self {
@@ -22,7 +28,7 @@ struct NFCView: View {
 
         var placeholder: String {
             switch self {
-            case .text: "태그에 쓸 텍스트를 입력하세요"
+            case .text: String(localized: "Enter text to write to tag")
             case .url: "https://example.com"
             }
         }
@@ -51,7 +57,7 @@ struct NFCView: View {
 
     private var readSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            SectionTitle("읽기")
+            SectionTitle("Read")
 
             Button {
                 nfcManager.startScan()
@@ -78,11 +84,11 @@ struct NFCView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 3) {
-                        Text(nfcManager.isScanning ? "스캔 중..." : "태그 스캔하기")
+                        Text(nfcManager.isScanning ? String(localized: "Scanning...") : String(localized: "Scan Tag"))
                             .font(.body.weight(.semibold))
                             .fontDesign(.rounded)
                             .foregroundStyle(.primary)
-                        Text("iPhone 상단을 NFC 태그에 대세요")
+                        Text("Hold the top of your iPhone near an NFC tag")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -102,7 +108,7 @@ struct NFCView: View {
 
             if !nfcManager.scannedRecords.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    Label("스캔 결과", systemImage: "checkmark.shield")
+                    Label("Scan Results", systemImage: "checkmark.shield")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                         .textCase(.uppercase)
@@ -118,7 +124,7 @@ struct NFCView: View {
                         }
                         .overlay(alignment: .topTrailing) {
                             if savedRecordID == record.id {
-                                Text("저장됨")
+                                Text("Saved")
                                     .font(.caption2.weight(.bold))
                                     .foregroundStyle(.white)
                                     .padding(.horizontal, 8)
@@ -138,18 +144,18 @@ struct NFCView: View {
 
     private var writeSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            SectionTitle("쓰기")
+            SectionTitle("Write")
 
             VStack(spacing: 16) {
                 // Type selector
-                Picker("타입", selection: Binding(
+                Picker("Type", selection: Binding(
                     get: { selectedType },
                     set: { newValue in
                         selectedType = newValue
                         writeText = ""
                     }
                 )) {
-                    Text("텍스트").tag(WriteType.text)
+                    Text("Text").tag(WriteType.text)
                     Text("URL").tag(WriteType.url)
                 }
                 .pickerStyle(.segmented)
@@ -208,7 +214,7 @@ struct NFCView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "antenna.radiowaves.left.and.right")
                             .font(.body.weight(.semibold))
-                        Text("태그에 쓰기")
+                        Text("Write to Tag")
                             .font(.body.weight(.bold))
                             .fontDesign(.rounded)
                     }

@@ -10,7 +10,7 @@ struct SavedTagsView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 HStack {
-                    SectionTitle("저장된 태그")
+                    SectionTitle("Saved Tags")
                     Spacer()
                     Button {
                         showingAdd = true
@@ -51,13 +51,13 @@ struct SavedTagsView: View {
             Image(systemName: "tag")
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
-            Text("저장된 태그 없음")
+            Text("No Saved Tags")
                 .font(.title3)
-            Text("자주 사용하는 태그 데이터를 저장해두고\n바로 NFC에 쓸 수 있습니다.")
+            Text("Save frequently used tag data\nand write to NFC instantly.")
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-            Button("새 태그 만들기") {
+            Button("Create New Tag") {
                 showingAdd = true
             }
             .buttonStyle(.borderedProminent)
@@ -69,7 +69,11 @@ struct SavedTagsView: View {
         LazyVStack(spacing: 10) {
             ForEach(store.tags) { tag in
                 SavedTagRow(tag: tag) {
-                    nfcManager.write(text: tag.content)
+                    var textToWrite = tag.content
+                    if tag.type == .url && !textToWrite.contains("://") {
+                        textToWrite = "https://\(textToWrite)"
+                    }
+                    nfcManager.write(text: textToWrite)
                 } onEdit: {
                     editingTag = tag
                 } onDelete: {
@@ -127,7 +131,7 @@ struct SavedTagRow: View {
                     HStack(spacing: 5) {
                         Image(systemName: "antenna.radiowaves.left.and.right")
                             .font(.caption.weight(.bold))
-                        Text("쓰기")
+                        Text("Write")
                             .font(.subheadline.weight(.semibold))
                     }
                     .frame(maxWidth: .infinity)
@@ -143,7 +147,7 @@ struct SavedTagRow: View {
                     HStack(spacing: 5) {
                         Image(systemName: "pencil")
                             .font(.caption.weight(.bold))
-                        Text("편집")
+                        Text("Edit")
                             .font(.subheadline.weight(.semibold))
                     }
                     .frame(maxWidth: .infinity)
@@ -201,35 +205,30 @@ struct SavedTagEditView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("이름") {
-                    TextField("태그 이름", text: $name)
+                Section("Name") {
+                    TextField("Tag Name", text: $name)
                 }
 
-                Section("타입") {
-                    Picker("타입", selection: $type) {
-                        Text("텍스트").tag(NFCRecord.RecordType.text)
+                Section("Type") {
+                    Picker("Type", selection: $type) {
+                        Text("Text").tag(NFCRecord.RecordType.text)
                         Text("URL").tag(NFCRecord.RecordType.url)
                     }
                     .pickerStyle(.segmented)
                 }
 
-                Section("내용") {
+                Section("Content") {
                     if type == .url {
-                        TextField(
-                            "",
-                            text: $content,
-                            prompt: Text("https://example.com")
-                                .foregroundStyle(.gray.opacity(0.5))
-                        )
-                        .keyboardType(.URL)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
+                        TextField("", text: $content)
+                            .keyboardType(.URL)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
                     } else {
                         ZStack(alignment: .topLeading) {
                             TextEditor(text: $content)
                                 .frame(minHeight: 80)
                             if content.isEmpty {
-                                Text("태그에 저장할 텍스트를 입력하세요")
+                                Text("Enter text to save to tag")
                                     .foregroundStyle(.gray.opacity(0.5))
                                     .padding(.top, 8)
                                     .padding(.leading, 5)
@@ -239,14 +238,14 @@ struct SavedTagEditView: View {
                     }
                 }
             }
-            .navigationTitle(isEditing ? "태그 편집" : "새 태그")
+            .navigationTitle(isEditing ? String(localized: "Edit Tag") : String(localized: "New Tag"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("취소") { dismiss() }
+                    Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("저장") {
+                    Button("Save") {
                         save()
                         dismiss()
                     }

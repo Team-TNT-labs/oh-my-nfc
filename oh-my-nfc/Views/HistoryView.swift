@@ -7,10 +7,10 @@ struct HistoryView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 HStack {
-                    SectionTitle("스캔 기록")
+                    SectionTitle("Scan History")
                     Spacer()
                     if !nfcManager.scanHistory.isEmpty {
-                        Button("전체 삭제", role: .destructive) {
+                        Button("Delete All", role: .destructive) {
                             withAnimation {
                                 nfcManager.clearHistory()
                             }
@@ -46,12 +46,12 @@ struct HistoryView: View {
             Image(systemName: "clock.arrow.circlepath")
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
-            Text("스캔 기록 없음")
+            Text("No Scan History")
                 .font(.title3)
-            Text("NFC 태그를 스캔하면 여기에 기록이 남습니다.")
+            Text("Scan an NFC tag and the history will appear here.")
                 .font(.body)
                 .foregroundStyle(.secondary)
-            Button("태그 스캔하기") {
+            Button("Scan Tag") {
                 nfcManager.startScan()
             }
             .buttonStyle(.borderedProminent)

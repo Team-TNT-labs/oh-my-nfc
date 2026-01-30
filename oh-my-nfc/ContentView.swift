@@ -6,10 +6,10 @@ struct ContentView: View {
             Tab("NFC", systemImage: "sensor.tag.radiowaves.forward") {
                 NFCView()
             }
-            Tab("저장", systemImage: "tag") {
+            Tab("Saved", systemImage: "tag") {
                 SavedTagsView()
             }
-            Tab("기록", systemImage: "clock.arrow.circlepath") {
+            Tab("History", systemImage: "clock.arrow.circlepath") {
                 HistoryView()
             }
         }

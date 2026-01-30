@@ -15,9 +15,9 @@ struct NFCRecord: Identifiable, Codable, Equatable {
 
         var label: String {
             switch self {
-            case .text: "텍스트"
+            case .text: String(localized: "Text")
             case .url: "URL"
-            case .unknown: "기타"
+            case .unknown: String(localized: "Other")
             }
         }
 

@@ -22,6 +22,8 @@
 		AA00000100000000000000SC /* NFCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BG /* NFCView.swift */; };
 		AA00000100000000000000R1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BA /* Assets.xcassets */; };
 		C7BB5DD32F2B06F900BE4CA2 /* ohmynfc.icon in Resources */ = {isa = PBXBuildFile; fileRef = C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */; };
+		AA00000100000000000000R2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BH /* Localizable.xcstrings */; };
+		AA00000100000000000000R3 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AA00000100000000000000BI /* InfoPlist.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		AA00000100000000000000BG /* NFCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCView.swift; sourceTree = "<group>"; };
 		AA00000100000000000000F1 /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
 		C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = ohmynfc.icon; sourceTree = "<group>"; };
+		AA00000100000000000000BH /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		AA00000100000000000000BI /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				AA00000100000000000000B9 /* Info.plist */,
 				C7BB5DD22F2B06F900BE4CA2 /* ohmynfc.icon */,
 				AA00000100000000000000BA /* Assets.xcassets */,
+				AA00000100000000000000BH /* Localizable.xcstrings */,
+				AA00000100000000000000BI /* InfoPlist.xcstrings */,
 			);
 			path = "oh-my-nfc";
 			sourceTree = "<group>";
@@ -163,6 +169,17 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ko,
+				ja,
+				"zh-Hans",
+				"zh-Hant",
+				es,
+				fr,
+				de,
+				"pt-BR",
+				it,
+				ru,
+				ar,
 				Base,
 			);
 			mainGroup = AA00000100000000000000D0;
@@ -184,6 +201,8 @@
 			files = (
 				AA00000100000000000000R1 /* Assets.xcassets in Resources */,
 				C7BB5DD32F2B06F900BE4CA2 /* ohmynfc.icon in Resources */,
+				AA00000100000000000000R2 /* Localizable.xcstrings in Resources */,
+				AA00000100000000000000R3 /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +366,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "oh-my-nfc/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "oh-my-nfc";
-				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC 태그를 읽고 쓰기 위해 NFC 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC access is required to read and write NFC tags.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -381,7 +400,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "oh-my-nfc/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "oh-my-nfc";
-				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC 태그를 읽고 쓰기 위해 NFC 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NFCReaderUsageDescription = "NFC access is required to read and write NFC tags.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
